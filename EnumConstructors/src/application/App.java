@@ -11,6 +11,10 @@ public class App {
 		System.out.println(Fruit.APPLE);
 		System.out.println(Fruit.BANANA);
 		System.out.println(Fruit.ORANGE);
+		
+		System.out.println("APPLE Ordinal is " + Fruit.APPLE.ordinal());
+		System.out.println("BANANA Ordinal is " + Fruit.BANANA.ordinal());
+		System.out.println("ORANGE Ordinal is " + Fruit.ORANGE.ordinal());
 	}
 
 }
