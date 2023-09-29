@@ -1,16 +1,10 @@
-package guI;
+package application;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.Random;
 
 import javax.swing.JPanel;
-
-import model.World;
 
 public class GamePanel extends JPanel{
 
@@ -22,27 +16,10 @@ public class GamePanel extends JPanel{
 	private int topBottomMargin;
 	private int leftRightMargin;
 	
-	private World world;
-	
 	private static final long serialVersionUID = 1L;
 	
 	public GamePanel() {
 //		this.setBackground(Color.BLUE);
-		addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-	
-				System.out.println(e.getX() + " - " + e.getY());
-				
-				world.setCell(13, 13, true);
-				repaint();
-			}
-			
-			
-		});	
-			
-
 	}
 
 	@Override
@@ -57,20 +34,6 @@ public class GamePanel extends JPanel{
 		leftRightMargin = ((width % CELLSIZE) + CELLSIZE)/2;
 		topBottomMargin = ((height % CELLSIZE) + CELLSIZE)/2;
 		
-		int rows = (width - (leftRightMargin *2)) / CELLSIZE;
-		int columns =(height - (topBottomMargin * 2))/ CELLSIZE;
-		System.out.println("We have " + rows + " rows and " + columns + " columns.");
-		if(world == null) {
-			world = new World(rows, columns);
-		}
-		
-//		for(int rand = 0; rand < 10; rand++ ) {
-//			world.setCells(new Random().nextInt(14), new Random().nextInt(14), true);	
-//		}
-		world.setCell(0, 0, true);	
-		world.setCell(3, 2, true);	
-		
-		
 		g2D.setColor(backgroundColor);
 		g2D.fillRect(0, 0, width, height);
 		
@@ -78,15 +41,8 @@ public class GamePanel extends JPanel{
 //		g2D.fillRect(leftRightMargin, topBottomMargin, width - (2*leftRightMargin), height - (2*topBottomMargin));
 //		
 		this.drawGrid(g2D, width, height);
-//		this.fillCell(g2D, 2, 4, true);
-//		this.fillCell(g2D, 0, 0, true);
-		
-		for(int col = 0; col < rows; col++) {
-			
-			for(int row = 0; row < columns; row++) {
-				this.fillCell(g2D, row, col, world.getCell(row,col));
-			}
-		}
+		this.fillCell(g2D, 2, 4, true);
+		this.fillCell(g2D, 0, 0, true);
 		
 		
 	}
