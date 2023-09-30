@@ -133,6 +133,7 @@ public class GamePanel extends JPanel {
 		repaint();
 
 	}
+	
 
 }
 
