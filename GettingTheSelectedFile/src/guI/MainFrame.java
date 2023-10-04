@@ -8,13 +8,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 public class MainFrame extends JFrame{
 
 	private GamePanel gamePanel = new GamePanel();
 	
+	private static final String defaultFilename = "gameoflive.sav";
 	private static final long serialVersionUID = 1L;
 	
 	public MainFrame() {
@@ -33,15 +36,30 @@ public class MainFrame extends JFrame{
 		menuBar.add(fileMenu);
 		setMenuBar(menuBar);
 		
+
+		JFileChooser fileChooser = new JFileChooser();
+
 		openItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Open");
 			}
-		});
+		});		
+		
 		saveItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Save");
+				fileChooser.setSelectedFile(new File(defaultFilename));
+
+				int userOption = fileChooser.showSaveDialog(MainFrame.this);
+
+				if (userOption == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = fileChooser.getSelectedFile();
+					System.out.println("File Saved as: " + selectedFile.getName());
+				} else {
+					System.out.println("Save command canceled");
+				}
+
 			}
+
 		});
 		
 		addKeyListener(new KeyAdapter() {
