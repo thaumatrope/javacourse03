@@ -48,7 +48,7 @@ public class App {
 				newwords = newline.split("[0-9]*\\W");				
 				
 				for(var word:newwords) {
-					words1984.add(word.trim());
+					words1984.add(word.trim().toLowerCase());
 				}	
 			}
 			
@@ -63,10 +63,10 @@ public class App {
 			String newline;
 			String[] newwords;
 			while ((newline = br.readLine()) != null) {
-				newwords = newline.split("[0-9]*\\W");
+				newwords = newline.split("[^a-zA-Z]+"); //([0-9]*\\W") 
 				
 				for(var word:newwords) {
-					wordsAnimal.add(word.trim());
+					wordsAnimal.add(word.trim().toLowerCase());
 				}			
 			}
 			
@@ -114,6 +114,27 @@ public class App {
 		}
 		System.out.println();
 		
+
+		System.out.println();
+		System.out.println("Starting intersection....");
+		
+		System.out.println();
+		
+		
+		TreeSet<String> intersection = new TreeSet<String>(words1984);
+		intersection.retainAll(wordsAnimal); // intersection (Schnittmenge)
+		
+		i = 20;
+		for (var word: intersection) {
+			if(i < 0) {
+				System.out.println();
+				i = 20;
+			}
+			System.out.print(word + " ");
+			i--;
+		}
+		
+		System.exit(0);
 		
 		System.out.println();
 		System.out.println("Starting union....");
@@ -134,27 +155,6 @@ public class App {
 			i--;
 		}
 		
-		System.out.println();
-		System.out.println("Starting intersection....");
-		
-		System.out.println();
-		
-		
-		TreeSet<String> intersection = new TreeSet<String>(words1984);
-		intersection.retainAll(wordsAnimal); // intersection (Schnittmenge)
-		
-		i = 20;
-		for (var word: intersection) {
-			if(i < 0) {
-				System.out.println();
-				i = 20;
-			}
-			System.out.print(word + " ");
-			i--;
-		}
-		
-		
-
 		
 		
 	}
