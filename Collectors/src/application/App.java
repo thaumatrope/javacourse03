@@ -1,7 +1,7 @@
 package application;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 class Person{
 	private String name;
@@ -35,16 +35,22 @@ public class App {
 		
 		names.stream().forEach(System.out::println);
 		System.out.println();
-		//@formatter:off
+		
+		//@formatter:Off
 //		names.stream().map(s -> new Person(s)).forEach(System.out::println);
-		names.stream().
-		map(Person::new).
-		forEach(System.out::println);
+		var list = names.stream().			//generator				
+		map(Person::new).					// intermediate methods
+		collect(Collectors.toList());		// terminal operation
+		//@formatter:On
 		
-		
-		//@formatter:on
 		System.out.println();
-		names.stream().forEach(System.out::println);
+		for(var person:list) {
+			System.out.print(person.getClass() + " | ");
+			System.out.println("From list with twist: " + person);
+		}
+		
+		System.out.println();
+		System.out.println(names);
 
 //		ArrayList<Person> people = names.stream().map(s -> new Person(s));
 	}
